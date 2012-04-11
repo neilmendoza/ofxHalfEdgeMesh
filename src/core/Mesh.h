@@ -1,5 +1,5 @@
 /*
- *  Face.h
+ *  Mesh.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -32,18 +32,38 @@
 #pragma once
 
 #include <tr1/memory>
+#include <map>
+
+#include "ofVec3f.h"
+#include "ofVboMesh.h"
+#include "HalfEdge.h"
+#include "Edge.h"
 
 namespace ofxHalfEdgeMesh
 {
-	using namespace std;
 	using namespace tr1;
-	
-	class HalfEdge;
-	
-	class Face
+
+	class Mesh : public ofVboMesh
 	{
 	public:
+		typedef shared_ptr<Mesh> Ptr;
+		virtual void buildEdgeData() = 0;
+		virtual ~Mesh();
+		
+	protected:
+		void pairHalfEdges();
+		vector<HalfEdge::Ptr> halfEdges;
+		map<int, HalfEdge::Ptr> vertHalfEdge;
+		
 	private:
-		shared_ptr<HalfEdge> halfEdge;
-	};
+		vector<HalfEdge::Ptr> getUnpairedHalfEdges();
+		vector<Edge::Ptr> edges;
+		
+		struct VertexInfo
+		{
+			typedef shared_ptr<VertexInfo> Ptr;
+			vector<HalfEdge::Ptr> out;
+			vector<HalfEdge::Ptr> in;
+		};
+	};	
 }

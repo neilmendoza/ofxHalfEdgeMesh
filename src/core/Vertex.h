@@ -1,5 +1,5 @@
 /*
- *  Edge.h
+ *  Vertex.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -33,17 +33,21 @@
 
 #include <tr1/memory>
 
+#include "ofVec3f.h"
+#include "HalfEdge.h"
+
 namespace ofxHalfEdgeMesh
 {
 	using namespace std;
 	using namespace tr1;
 	
-	class HalfEdge;
-	
-	class Edge
+	class Vertex
 	{
 	public:
+		typedef shared_ptr<Vertex> Ptr;
+		
 	private:
+		int idx;
 		shared_ptr<HalfEdge> halfEdge;
-	};	
+	};
 }

@@ -1,5 +1,5 @@
 /*
- *  Vertex.h
+ *  ofxHalfEdgeMesh.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -29,23 +29,12 @@
  *  POSSIBILITY OF SUCH DAMAGE. 
  *
  */
+
+/*
+ * Half edge mesh implementation loosely based on HEMESH - http://hemesh.wblut.com/
+ */
 #pragma once
 
-#include <tr1/memory>
+#include "core/IndexedTriMesh.h"
 
-#include "ofVec3f.h"
-
-namespace ofxHalfEdgeMesh
-{
-	using namespace std;
-	using namespace tr1;
-	
-	class HalfEdge;
-	
-	class Vertex : public ofVec3f
-	{
-	public:
-	private:
-		shared_ptr<HalfEdge> halfEdge;
-	};
-}
+namespace ofxHem = ofxHalfEdgeMesh;

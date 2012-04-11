@@ -1,5 +1,5 @@
 /*
- *  ofxHalfEdgeMesh.h
+ *  IndexedTriMesh.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -31,6 +31,13 @@
  */
 #pragma once
 
-#include "core/HalfEdge.h"
+#include "Mesh.h"
 
-namespace ofxHem = ofxHalfEdgeMesh;
+namespace ofxHalfEdgeMesh
+{
+	class IndexedTriMesh : public Mesh
+	{
+	public:
+		void buildEdgeData();
+	};
+}

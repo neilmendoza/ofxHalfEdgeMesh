@@ -31,10 +31,6 @@
  */
 #pragma once
 
-#include "Face.h"
-#include "Vertex.h"
-#include "Edge.h"
-
 #include <tr1/memory>
 
 namespace ofxHalfEdgeMesh
@@ -42,11 +38,34 @@ namespace ofxHalfEdgeMesh
 	using namespace std;
 	using namespace tr1;
 	
+	class Face;
+	class Edge;
+	
 	class HalfEdge
 	{
 	public:
+		typedef shared_ptr<HalfEdge> Ptr;
+		
+		int getVertexIdx() const { return vertexIdx; }
+		void setVertexIdx(const int vertexIdx) { this->vertexIdx = vertexIdx; }
+		
+		shared_ptr<HalfEdge> getPrev() const { return prev; }
+		void setPrev(const shared_ptr<HalfEdge> prev) { this->prev = prev; }
+		
+		shared_ptr<HalfEdge> getNext() const { return next; }
+		void setNext(const shared_ptr<HalfEdge> next) { this->next = next; }
+		
+		shared_ptr<HalfEdge> getPair() const { return pair; }
+		void setPair(const shared_ptr<HalfEdge> pair) { this->pair = pair; }
+		
+		shared_ptr<Edge> getEdge() const { return edge; }
+		void setEdge(const shared_ptr<Edge> edge) { this->edge = edge; }
+		
+		shared_ptr<Face> getFace() const { return face; }
+		void setFace(const shared_ptr<Face> face) { this->face = face; }
+		
 	private:
-		shared_ptr<Vertex> vertex;
+		int vertexIdx;
 		shared_ptr<HalfEdge> prev;
 		shared_ptr<HalfEdge> next;
 		shared_ptr<HalfEdge> pair;
