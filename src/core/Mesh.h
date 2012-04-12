@@ -49,11 +49,13 @@ namespace ofxHalfEdgeMesh
 		typedef shared_ptr<Mesh> Ptr;
 		virtual void buildEdgeData() = 0;
 		virtual ~Mesh();
+        
+        HalfEdge::Ptr getHalfEdge(int vertexIdx);
 		
 	protected:
 		void pairHalfEdges();
 		vector<HalfEdge::Ptr> halfEdges;
-		map<int, HalfEdge::Ptr> vertHalfEdge;
+		map<int, HalfEdge::Ptr> vertHalfEdges;
 		
 	private:
 		vector<HalfEdge::Ptr> getUnpairedHalfEdges();

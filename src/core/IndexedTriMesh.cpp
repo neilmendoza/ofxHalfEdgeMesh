@@ -54,9 +54,9 @@ namespace ofxHalfEdgeMesh
 							halfEdge->setFace(face);
 							if (!face->getHalfEdge()) face->setHalfEdge(halfEdge);
 							halfEdge->setVertexIdx(idx);
-							if (vertHalfEdge.find(idx) == vertHalfEdge.end())
+							if (vertHalfEdges.find(idx) == vertHalfEdges.end())
 							{
-								vertHalfEdge.insert(make_pair(idx, halfEdge));
+								vertHalfEdges.insert(make_pair(idx, halfEdge));
 							}
 						}
 						

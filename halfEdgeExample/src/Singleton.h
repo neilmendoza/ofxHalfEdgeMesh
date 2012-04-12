@@ -1,5 +1,5 @@
 /*
- *  Vertex.h
+ *  Singleton.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -31,26 +31,15 @@
  */
 #pragma once
 
-#include <tr1/memory>
-
-#include "ofVec3f.h"
-#include "HalfEdge.h"
-
-namespace ofxHalfEdgeMesh
+namespace itg
 {
-	using namespace std;
-	using namespace tr1;
-	
-    /**
-     * @deprecated Data is stored in vertHalfEdges map in mesh 
-     */
-	class Vertex
+	template<typename T> class Singleton
 	{
 	public:
-		typedef shared_ptr<Vertex> Ptr;
-		
-	private:
-		int idx;
-		shared_ptr<HalfEdge> halfEdge;
+		static T& instance()
+		{
+			static T theInstance;
+			return theInstance;
+		}
 	};
 }

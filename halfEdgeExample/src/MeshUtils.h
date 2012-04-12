@@ -1,5 +1,5 @@
 /*
- *  Vertex.h
+ *  MeshUtils.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -31,26 +31,18 @@
  */
 #pragma once
 
-#include <tr1/memory>
+#include "Singleton.h"
+#include "ofMesh.h"
 
-#include "ofVec3f.h"
-#include "HalfEdge.h"
-
-namespace ofxHalfEdgeMesh
+namespace itg
 {
-	using namespace std;
-	using namespace tr1;
-	
-    /**
-     * @deprecated Data is stored in vertHalfEdges map in mesh 
-     */
-	class Vertex
+	class MeshUtils : public Singleton<MeshUtils>
 	{
 	public:
-		typedef shared_ptr<Vertex> Ptr;
-		
-	private:
-		int idx;
-		shared_ptr<HalfEdge> halfEdge;
-	};
+		void zeroNormals(ofMesh& mesh);
+		void genNormals(ofMesh& mesh);
+		void normalizeNormals(ofMesh& mesh);
+		int getSize(ofMesh& mesh);
+		int getIndex(ofMesh& mesh, const int idx);
+	};	
 }

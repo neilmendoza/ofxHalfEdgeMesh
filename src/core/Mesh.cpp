@@ -37,6 +37,12 @@ namespace ofxHalfEdgeMesh
 {
 	Mesh::~Mesh() {}
 	
+    HalfEdge::Ptr Mesh::getHalfEdge(int vertexIdx)
+    {
+        if (vertHalfEdges.find(vertexIdx) == vertHalfEdges.end()) return HalfEdge::Ptr();
+        return vertHalfEdges[vertexIdx];
+    }
+    
 	void Mesh::pairHalfEdges()
 	{
 		vector<HalfEdge::Ptr> unpairedHalfEdges = getUnpairedHalfEdges();
