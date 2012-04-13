@@ -37,27 +37,33 @@ void testApp::setup()
     
     walkMesh.setMode(OF_PRIMITIVE_TRIANGLES);
     
-    halfEdge = triMesh.getHalfEdge(triMesh.getIndex(0));
+    halfEdges.push_back(triMesh.getHalfEdge(triMesh.getIndex(0)));
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    if (ofGetElapsedTimeMillis() - lastUpdateTime > 100)
+    if (ofGetElapsedTimeMillis() - lastUpdateTime > 20 && walkMesh.getNumVertices() != triMesh.getNumIndices())
     {
-        for (int i = 0; i < 3; ++i)
+        bool faceFound = false;
+        while (!faceFound)
         {
-            if (halfEdge->getPair() && faces.find(halfEdge->getPair()->getFace()) == faces.end())
+            for (int i = 0; i < 3; ++i)
             {
-                halfEdge = halfEdge->getPair();
-                faces.insert(halfEdge->getFace());
-                walkMesh.addVertex(triMesh.getVertex(halfEdge->getVertexIdx()));
-                walkMesh.addVertex(triMesh.getVertex(halfEdge->getNext()->getVertexIdx()));
-                walkMesh.addVertex(triMesh.getVertex(halfEdge->getNext()->getNext()->getVertexIdx()));
-                itg::MeshUtils::instance().genNormals(walkMesh);
-                break;
+                if (halfEdges.back()->getPair() && faces.find(halfEdges.back()->getPair()->getFace()) == faces.end())
+                {
+                    halfEdges.push_back(halfEdges.back()->getPair());
+                    faces.insert(halfEdges.back()->getFace());
+                    walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getVertexIdx()));
+                    walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getNext()->getVertexIdx()));
+                    walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getNext()->getNext()->getVertexIdx()));
+                    itg::MeshUtils::instance().genNormals(walkMesh);
+                    faceFound = true;
+                    break;
+                }
+                halfEdges[halfEdges.size() - 1] = halfEdges[halfEdges.size() - 1]->getNext();
             }
-            halfEdge = halfEdge->getNext();
+            if (!faceFound) halfEdges.pop_back();
         }
         lastUpdateTime = ofGetElapsedTimeMillis();
     }
@@ -68,6 +74,7 @@ void testApp::draw()
 {
     ofSetColor(255, 255, 0);
     cam.begin();
+    glRotatef(20 * ofGetElapsedTimef(), 0.5, 0, 1);
     light.disable();
     triMesh.drawWireframe();
     glEnable(GL_DEPTH_TEST);

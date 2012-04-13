@@ -29,8 +29,8 @@ private:
     void addFace(ofxHem::Face::Ptr face);
     
     ofxHem::IndexedTriMesh triMesh;
-    ofxHem::HalfEdge::Ptr halfEdge;
     set<ofxHem::Face::Ptr> faces;
+    deque<ofxHem::HalfEdge::Ptr> halfEdges;
     
     ofMesh walkMesh;
     ofxDelaunay delaunay;
