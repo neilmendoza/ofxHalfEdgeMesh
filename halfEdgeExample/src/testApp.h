@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxHalfEdgeMesh.h"
 #include "ofxDelaunay.h"
+#include <set>
 
 class testApp : public ofBaseApp
 {
@@ -25,8 +26,15 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
+    void addFace(ofxHem::Face::Ptr face);
+    
     ofxHem::IndexedTriMesh triMesh;
+    ofxHem::HalfEdge::Ptr halfEdge;
+    set<ofxHem::Face::Ptr> faces;
+    
+    ofMesh walkMesh;
     ofxDelaunay delaunay;
     ofLight light;
     ofEasyCam cam;
+    int lastUpdateTime;
 };

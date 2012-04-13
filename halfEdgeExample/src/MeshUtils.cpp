@@ -94,6 +94,7 @@ namespace itg
                 }
             }
         }
+        else ofLog(OF_LOG_ERROR, "mesh mode not specified");
         normalizeNormals(mesh);
 	}
 	

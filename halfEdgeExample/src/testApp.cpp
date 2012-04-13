@@ -4,10 +4,10 @@
 //--------------------------------------------------------------
 void testApp::setup()
 {
+    lastUpdateTime = 0;
     for (int i = 0; i < NUM_TRIS * 3; ++i)
     {
-        ofVec3f vertex(ofRandomf(), ofRandomf(), 0.02 * ofRandomf());
-        //cout << i << ": " << vertex << endl;
+        ofVec3f vertex(ofRandomf(), ofRandomf(), 0.1 * ofRandomf());
         delaunay.addPoint(vertex);
     }
     delaunay.triangulate();
@@ -27,37 +27,40 @@ void testApp::setup()
     // add vertices
     triMesh.addVertices(vertices, NUM_VERTS);
     
-    /*
-    // add indices
-    for (int i = 0; i < tris.size(); ++i)
-    {
-        cout << "triangle " << i << endl;
-        
-        for (int j = 0; j < 3; ++j)
-        {
-            triMesh.addIndex(tris[i].pointIndex[j]);
-            //triMesh.addVertex(tris[i].points[j]);
-            //triMesh.addNormal(normal);
-            cout << tris[i].points[j] << ", " << tris[i].pointIndex[j] << endl;
-        }
-        
-        cout << endl;
-    }
-     */
-    
     cam.setNearClip(1e-4);
     cam.setDistance(2);
     
     light.setPosition(5, 0, 5);
-    light.enable();
     triMesh.setMode(OF_PRIMITIVE_TRIANGLES);
     triMesh.buildEdgeData();
     itg::MeshUtils::instance().genNormals(triMesh);
+    
+    walkMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+    
+    halfEdge = triMesh.getHalfEdge(triMesh.getIndex(0));
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
-
+void testApp::update()
+{
+    if (ofGetElapsedTimeMillis() - lastUpdateTime > 100)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (halfEdge->getPair() && faces.find(halfEdge->getPair()->getFace()) == faces.end())
+            {
+                halfEdge = halfEdge->getPair();
+                faces.insert(halfEdge->getFace());
+                walkMesh.addVertex(triMesh.getVertex(halfEdge->getVertexIdx()));
+                walkMesh.addVertex(triMesh.getVertex(halfEdge->getNext()->getVertexIdx()));
+                walkMesh.addVertex(triMesh.getVertex(halfEdge->getNext()->getNext()->getVertexIdx()));
+                itg::MeshUtils::instance().genNormals(walkMesh);
+                break;
+            }
+            halfEdge = halfEdge->getNext();
+        }
+        lastUpdateTime = ofGetElapsedTimeMillis();
+    }
 }
 
 //--------------------------------------------------------------
@@ -65,14 +68,15 @@ void testApp::draw()
 {
     ofSetColor(255, 255, 0);
     cam.begin();
+    light.disable();
+    triMesh.drawWireframe();
     glEnable(GL_DEPTH_TEST);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
-    triMesh.draw();
+    light.enable();
+    walkMesh.draw();
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
-    ofDrawAxis(0.5);
-
     cam.end();
 }
 

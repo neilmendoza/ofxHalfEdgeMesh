@@ -36,5 +36,6 @@
 #pragma once
 
 #include "core/IndexedTriMesh.h"
+#include "core/Face.h"
 
 namespace ofxHem = ofxHalfEdgeMesh;
