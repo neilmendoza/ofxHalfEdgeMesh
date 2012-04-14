@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		282C6FF01535D84900F4E688 /* Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282C6FEA1535D84900F4E688 /* Delaunay.cpp */; };
-		282C6FF11535D84900F4E688 /* ofxDelaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282C6FEE1535D84900F4E688 /* ofxDelaunay.cpp */; };
 		282CA01214692A0100CF440F /* libfl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282C9FFB14692A0100CF440F /* libfl.a */; };
 		282CA01314692A0100CF440F /* libflann_cpp_s-gd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282C9FFC14692A0100CF440F /* libflann_cpp_s-gd.a */; };
 		282CA01414692A0100CF440F /* libflann_cpp_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282C9FFD14692A0100CF440F /* libflann_cpp_s.a */; };
@@ -69,11 +67,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		282C6FEA1535D84900F4E688 /* Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delaunay.cpp; sourceTree = "<group>"; };
-		282C6FEB1535D84900F4E688 /* Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delaunay.h; sourceTree = "<group>"; };
-		282C6FEC1535D84900F4E688 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		282C6FEE1535D84900F4E688 /* ofxDelaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDelaunay.cpp; sourceTree = "<group>"; };
-		282C6FEF1535D84900F4E688 /* ofxDelaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDelaunay.h; sourceTree = "<group>"; };
 		282C9FDB14692A0100CF440F /* all_indices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = all_indices.h; sourceTree = "<group>"; };
 		282C9FDC14692A0100CF440F /* autotuned_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autotuned_index.h; sourceTree = "<group>"; };
 		282C9FDD14692A0100CF440F /* composite_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = composite_index.h; sourceTree = "<group>"; };
@@ -171,43 +164,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		282C6FE71535D84900F4E688 /* ofxDelaunay */ = {
-			isa = PBXGroup;
-			children = (
-				282C6FE81535D84900F4E688 /* libs */,
-				282C6FEC1535D84900F4E688 /* README */,
-				282C6FED1535D84900F4E688 /* src */,
-			);
-			name = ofxDelaunay;
-			path = ../../../addons/ofxDelaunay;
-			sourceTree = "<group>";
-		};
-		282C6FE81535D84900F4E688 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				282C6FE91535D84900F4E688 /* Delaunay */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		282C6FE91535D84900F4E688 /* Delaunay */ = {
-			isa = PBXGroup;
-			children = (
-				282C6FEA1535D84900F4E688 /* Delaunay.cpp */,
-				282C6FEB1535D84900F4E688 /* Delaunay.h */,
-			);
-			path = Delaunay;
-			sourceTree = "<group>";
-		};
-		282C6FED1535D84900F4E688 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				282C6FEE1535D84900F4E688 /* ofxDelaunay.cpp */,
-				282C6FEF1535D84900F4E688 /* ofxDelaunay.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		282C9F9F14692A0100CF440F /* ofxHalfEdgeMesh */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,7 +299,6 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				282C6FE71535D84900F4E688 /* ofxDelaunay */,
 				282C9F9F14692A0100CF440F /* ofxHalfEdgeMesh */,
 			);
 			name = addons;
@@ -519,8 +474,6 @@
 				282CA01814692A0100CF440F /* Mesh.cpp in Sources */,
 				282CA01914692A0100CF440F /* Vertex.cpp in Sources */,
 				282CA1DD14699F5100CF440F /* IndexedTriMesh.cpp in Sources */,
-				282C6FF01535D84900F4E688 /* Delaunay.cpp in Sources */,
-				282C6FF11535D84900F4E688 /* ofxDelaunay.cpp in Sources */,
 				28B3BB081536F8CA00A9C847 /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
