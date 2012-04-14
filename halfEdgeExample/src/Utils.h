@@ -1,5 +1,5 @@
 /*
- *  Singleton.h
+ *  MeshUtils.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -31,15 +31,16 @@
  */
 #pragma once
 
+#include "ofMesh.h"
+
 namespace itg
 {
-	template<typename T> class Singleton
-	{
-	public:
-		static T& instance()
-		{
-			static T theInstance;
-			return theInstance;
-		}
-	};
+    namespace mesh
+    {
+        void zeroNormals(ofMesh& mesh);
+        void genNormals(ofMesh& mesh);
+        void normalizeNormals(ofMesh& mesh);
+        int getSize(ofMesh& mesh);
+        int getIndex(ofMesh& mesh, const int idx);
+    }
 }

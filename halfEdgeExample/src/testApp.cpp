@@ -1,5 +1,5 @@
 #include "testApp.h"
-#include "MeshUtils.h"
+#include "Utils.h"
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -27,13 +27,16 @@ void testApp::setup()
     // add vertices
     triMesh.addVertices(vertices, NUM_VERTS);
     
+    // set up camera
     cam.setNearClip(1e-4);
     cam.setDistance(2);
     
+    // set up light
     light.setPosition(5, 0, 5);
+    
     triMesh.setMode(OF_PRIMITIVE_TRIANGLES);
     triMesh.buildEdgeData();
-    itg::MeshUtils::instance().genNormals(triMesh);
+    itg::mesh::genNormals(triMesh);
     
     walkMesh.setMode(OF_PRIMITIVE_TRIANGLES);
     
@@ -57,7 +60,7 @@ void testApp::update()
                     walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getVertexIdx()));
                     walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getNext()->getVertexIdx()));
                     walkMesh.addVertex(triMesh.getVertex(halfEdges.back()->getNext()->getNext()->getVertexIdx()));
-                    itg::MeshUtils::instance().genNormals(walkMesh);
+                    itg::mesh::genNormals(walkMesh);
                     faceFound = true;
                     break;
                 }
